@@ -40,7 +40,7 @@ report("#A1",answer)
 <div id="A2">
 <h3>Find the mean of the quiz grades for the first penguin.</h3>
 <script>
-var answer="please complete";
+var answer = d3.mean(classroom[0].quizes, getGrade);
 report("#A2",answer)    
 </script>
 </div>
@@ -48,7 +48,11 @@ report("#A2",answer)
 <div id="A3">
 <h3>Create a function to find the mean of the quiz grades for a given penguin.</h3>
 <script>
-var answer="please complete";
+    var PenguinGrade = function(penguin)
+    {
+        return d3.mean(penguin.quizes, getGrade);
+    }
+var answer= PenguinGrade(classroom[0]);
 report("#A3",answer)    
 </script>
 </div>
@@ -56,7 +60,7 @@ report("#A3",answer)
 <div id="A4">
 <h3>Find the mean quiz score of each penguins.  Use one line of "code"</h3>
 <script>
-var answer="please complete";
+var answer= classroom.map(PenguinGrade());
 report("#A4",answer)    
 </script>
     </div>
@@ -64,7 +68,7 @@ report("#A4",answer)
 <div id="A5">
 <h3>Find the mean of all the quiz score of the class. </h3>
 <script>
-var answer="please complete";
+var answer=d3.mean(answer);
 report("#A5",answer)    
 </script>
     </div>
@@ -74,7 +78,13 @@ report("#A5",answer)
 <div id="A6">
 <h3>Create a function that takes a penguin object and returns an object that contains one attribute, the picture of that penguin</h3>
 <script>
-var answer="please complete";
+    var getPicture = function(penguin)
+    {
+        var Pen = {
+            pic : penguin.picture };
+        return Pen;
+    }
+var answer=getPicture;
 report("#A6",answer)    
 </script>
     </div>
@@ -82,8 +92,15 @@ report("#A6",answer)
 <div id="A7">
 <h3>Expand your function from the last one, so that the object it returns not only has a picture attribute, but also new attribute called quizMean, which is the mean of that penguins quiz scores</h3>
 <script>
+    var getPicture = function(penguin)
+    {
+        var Pen = {
+            pic : penguin.picture,
+            quizMean: d3.mean(penguin.quizes, getGrade)};
+        return Pen;
+    }
 //be sure to test your function out.
-var answer="please complete";
+var answer=getPicture(classroom[0]);
 report("#A7",answer)    
 </script>
     </div>
@@ -106,7 +123,18 @@ report("#A8",answer)
         <li>finalGrade</li>
     </ul>
 <script>
-var answer="please complete";
+    var PenguinInfo = function(penguin)
+    {
+        var Pen =
+            {
+                pic: penguin.picture,
+                meanQuiz: d3.mean(penguin.quizes, getGrade),
+                meanTests: d3.mean(penguin.test, getGrade),
+                meanHW: d3.mean(penguin.homework, getGrade),
+                finalGrade: penguin.final.grade
+            }
+    }
+var answer=PenguinInfo;
 report("#A9",answer)    
 </script>
     </div>
@@ -133,7 +161,20 @@ report("#A10",answer)
 <h3>Write a function that takes the classroom data and returns an array of objects.  Each object will have two attributes: a picture and the final grade in the class.</h3>
     
 <script>
-
+    var ClassroomData = function(classroom)
+    {
+        var a = [];
+        classroom.forEach(function(item, index)
+        {
+            var Penguin =
+                {
+                    pic: item.picture,
+                    finalGrade: item.final.grade
+                }
+            a.push(Penguin);
+        })
+    }
+    var answer = ClassroomData;
     report("#B1",answer);
 </script>
     </div>
@@ -151,7 +192,20 @@ report("#A10",answer)
 <h3>Write a function to find the average grade of all students on the first quiz.</h3>
     <p>Here is what you should get.=6.217391304347826</p>
 <script>
-var answer="Please Complete";
+    var FirstQuiz = function(classroom)
+    {
+        var getFirstQuiz = function(penguin)
+        {
+            return penguin.quizes[0].grade;
+        }
+        var a = [];
+        classroom.forEach(function(item, index)
+        {
+            a.push(getFirstQuiz(item));
+        })
+        return d3.mean(a);
+    }
+var answer=FirstQuiz(classroom);
 report("#C1",answer)    
 </script>
     </div>
@@ -171,8 +225,21 @@ report("#C1",answer)
 <h3>Write a function that takes a number, day, and returns the average grade of all students on that day's quiz.</h3>
 <p>Hint you may define helper functions inside of a function.</p>
 <script>
+    var AverageGrade = function(day)
+    {
+        var getGrade = function(penguin)
+        {
+            return penguin.quizes[day - 1].grade;
+        }
+        var a = [];
+        classroom.forEach(function(item, index)
+        {
+            a.push(getGrade(item));
+        })
+        return d3.mean(a);
+    }
     
-var answer="Complete for Extra";
+var answer=AverageGrade;
     
 report("#D1",answer)    
 </script>
