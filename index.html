@@ -1,0 +1,51 @@
+<html>
+    <body>
+        <ol>
+            <li>
+                A1- Create a function to get the grade from a quiz object
+                <pre> 
+                var getGrade = function(quiz)
+                 {
+                    return quiz.grade;
+                 }
+                </pre>
+                We created a function called getGrade that would reurn the grade from a given quiz.
+            </li>
+            <br />
+            <li>
+                A2- Find the mean of the quiz grades for the first penguin.
+                <pre>
+                var answer = d3.mean(classroom[0].quizes, getGrade);
+                </pre>
+                We used the d3.mean() function to calculate the mean of an array created by mapping the first penguin's quiz grade with function getGrade().
+            </li>
+            <br />
+            <li>
+                A3- Create a function to find the mean of the quiz grades for a given penguin.
+                <pre>
+                var PenguinGrade = function(penguin)
+                {
+                    return d3.mean(penguin.quizes, getGrade);
+                }
+                </pre>
+                We created a function called PenguinGrade that takes in the penguin, uses the getGrade function to get all of the specific penguin's quiz grades, then creates an array through mapping, and finally uses the d3.mean() function to calculate the mean.  
+            </li>
+            <br />
+            <li>
+                A4- Find the mean quiz score of each penguins.  Use one line of "code".
+                <pre>
+                var answer= classroom.map(PenguinGrade);
+                </pre>
+                We used the PenguinGrade() function for each penguin in the classroom by using map() function.
+            </li>
+            <br />
+            <li>
+                A5- Find the mean of all the quiz score of the class. 
+                <pre>
+                var answer=d3.mean(answer);
+                </pre>
+                We used the d3.mean() function for the answer from the previous task.
+            </li>
+        </ol>
+    </body>
+</html>

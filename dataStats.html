@@ -108,7 +108,7 @@ report("#A7",answer)
 <div id="A8">
 <h3>With one line of code, return a list of objects that contain the picture and meanQuiz grade of all penguins</h3>
 <script>
-var answer="please complete";
+var answer=classroom.map(getPicture);
 report("#A8",answer)    
 </script>
     </div>
@@ -142,7 +142,7 @@ report("#A9",answer)
 <div id="A10">
 <h3>With one line of code, return a list of objects where each objects contains all of the summary info about each penguin.</h3>
 <script>
-var answer="please complete";
+var answer=classroom.map(PenguinInfo);
 report("#A10",answer)    
 </script>
     </div>
@@ -239,17 +239,27 @@ report("#C1",answer)
         return d3.mean(a);
     }
     
-var answer=AverageGrade;
+var answer=AverageGrade(1);
     
 report("#D1",answer)    
 </script>
     </div>
     
 <div id="D2">
-<h3>Write a function that returns an array of the class averages the students earn each day on thier quiz.</h3>
+<h3>Write a function that returns an array of the class averages the students earn each day on their quiz.</h3>
 <p>If you solved D1, you really just need a way to get an array of numbers to map.  You could do this by hand, but if you look up d3.range, you might find a better way to do it.</p>
 <script>
-var answer="Complete for Extra";
+    var ClassAverage = function()
+    {
+        var ans = [];
+        var count = d3.range(1, classroom.length);
+        count.forEach(function(item, index)
+        {
+            ans.push(AverageGrade(item));
+        })
+        return ans;
+    }
+var answer=ClassAverage();
     
 report("#D2",answer);    
 </script>
