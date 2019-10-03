@@ -163,17 +163,16 @@ report("#A10",answer)
 <script>
     var ClassroomData = function(classroom)
     {
-        var a = [];
-        classroom.forEach(function(item, index)
+        var getPenguin = function(penguin)
         {
-            var Penguin =
-                {
-                    pic: item.picture,
-                    finalGrade: item.final.grade
-                }
-            a.push(Penguin);
-        })
-        return a;
+           var Penguin =
+            {
+                pic: penguin.picture,
+                finalGrade: penguin.final.grade
+            }
+            return Penguin;
+        }
+        return classroom.map(getPenguin);
     }
     var answer = ClassroomData;
     report("#B1",answer);
@@ -199,12 +198,7 @@ report("#A10",answer)
         {
             return penguin.quizes[0].grade;
         }
-        var a = [];
-        classroom.forEach(function(item, index)
-        {
-            a.push(getFirstQuiz(item));
-        })
-        return d3.mean(a);
+        return d3.mean(classroom.map(getFirstQuiz));
     }
 var answer=FirstQuiz(classroom);
 report("#C1",answer)    
@@ -232,12 +226,7 @@ report("#C1",answer)
         {
             return penguin.quizes[day - 1].grade;
         }
-        var a = [];
-        classroom.forEach(function(item, index)
-        {
-            a.push(getGrade(item));
-        })
-        return d3.mean(a);
+        return d3.mean(classroom.map(getGrade));
     }
     
 var answer=AverageGrade(1);
@@ -254,11 +243,7 @@ report("#D1",answer)
     {
         var ans = [];
         var count = d3.range(1, classroom.length);
-        count.forEach(function(item, index)
-        {
-            ans.push(AverageGrade(item));
-        })
-        return ans;
+        return count.map(AverageGrade);
     }
 var answer=ClassAverage();
     
