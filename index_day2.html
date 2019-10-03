@@ -1,0 +1,68 @@
+<html>
+    <body>
+        <ol>        
+            <li>
+                B1- Write a function that takes the classroom data and returns an array of objects.  Each object will have two attributes: a picture and the final grade in the class.
+                <pre>
+                var ClassroomData = function(classroom)
+                {
+                    var getPenguin = function(penguin)
+                    {
+                       var Penguin =
+                        {
+                            pic: penguin.picture,
+                            finalGrade: penguin.final.grade
+                        }
+                        return Penguin;
+                    }
+                    return classroom.map(getPenguin);
+                }
+                </pre>
+                Function ClassroomData takes classroom and returns an array of objects. Function getPenguin is a helper function that takes a student and return their picture and final grade. The answer array is created by mapping classroom with function getPenguin.
+            </li>
+            <br />
+            <li>
+                C1- Write a function to find the average grade of all students on the first quiz.
+                <pre>
+                var FirstQuiz = function(classroom)
+                {
+                    var getFirstQuiz = function(penguin)
+                    {
+                        return penguin.quizes[0].grade;
+                    }
+                    return d3.mean(classroom.map(getFirstQuiz));
+                }
+                </pre>
+                Function FirstQuiz() takes the classroom data and return the average grade of all students in the first quiz. Function getFirstQuiz() is a helper function inside FirstQuiz() function. getFirstQuiz() takes a student and return its first quiz grade. Use the d3.mean() to calculate the average of the array created by mapping classroom with function getFirstQuiz().
+            </li>
+            <br />
+            <li>
+                D1- Write a function that takes a number, day, and returns the average grade of all students on that day's quiz.
+                <pre>
+                var AverageGrade = function(day)
+                {
+                    var getGrade = function(penguin)
+                    {
+                        return penguin.quizes[day - 1].grade;
+                    }
+                    return d3.mean(classroom.map(getGrade));
+                }
+                </pre>
+                Function AverageGrade() takes a number, day, and returns the average grade of all students on that day's quiz. Function getGrade() is a helper function inside AverageGrade() function. getGrade() takes a penguin and returns its grade on that day quiz. Use day - 1 because the array starts from 0. Use the d3.mean() to calculate the average of the array created by mapping classroom with function getGrade().
+            </li>
+            <br />
+            <li>
+                D2- Write a function that returns an array of the class averages the students earn each day on their quiz.
+                <pre>
+                var ClassAverage = function()
+                {
+                    var ans = [];
+                    var count = d3.range(1, classroom.length);
+                    return count.map(AverageGrade);
+                }
+                </pre>
+                Function ClassAverage() returns an array ans, contains the class averages the students earn each day on their quiz. Array count was created by function d3.range(), contains number from 1 to the number of students in the classroom. Create an array by mapping count with function AverageGrade().
+            </li>
+        </ol>
+    </body>
+</html>
